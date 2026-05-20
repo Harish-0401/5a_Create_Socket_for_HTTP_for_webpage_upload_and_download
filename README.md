@@ -16,8 +16,10 @@ To write a PYTHON program for socket for HTTP for web page upload and download
 6.Stop the program
 <BR>
 ## Program
-## Service 
 ~~~
+SERVER:
+
+
 import socket
 from pythonping import ping
 
@@ -34,21 +36,19 @@ print("Connected to:", addr)
 while True:
     hostname = c.recv(1024).decode()
 
-    if not hostname:
+ if not hostname:
         break
-
     try:
         result = ping(hostname, verbose=False)
         c.send(str(result).encode())
-
     except Exception:
         c.send("Not Found".encode())
 
 c.close()
 s.close()
-~~~
-## Client 
-~~~
+
+CLIENT:
+
 
 import socket
 
@@ -59,15 +59,29 @@ s.connect(('localhost', 8000))
 while True:
     ip = input("Enter the website you want to ping: ")
 
-    s.send(ip.encode())
-
+ s.send(ip.encode())
     response = s.recv(1024).decode()
-
     print(response)
+
+import socket
+
+s = socket.socket()
+
+s.connect(('localhost', 8000))
+
+while True:
+    ip = input("Enter the website you want to ping: ")
+    s.send(ip.encode())
+  response = s.recv(1024).decode()
+
+ print(response)
 ~~~
 
 ## OUTPUT
-<img width="1227" height="247" alt="image" src="https://github.com/user-attachments/assets/6360092d-bbac-4089-b852-1d3673cd50f7" />
+## Client 
+<img width="617" height="288" alt="image" src="https://github.com/user-attachments/assets/ae5814c2-af05-4fd0-bb5f-f8fa127120a0" />
+## Server
+<img width="617" height="288" alt="image" src="https://github.com/user-attachments/assets/187b16ab-9e45-463a-918c-92dec7495edb" />
 
 ## Result
 Thus the socket for HTTP for web page upload and download created and Executed
